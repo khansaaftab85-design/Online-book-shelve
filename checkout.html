@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — BookShelf</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --accent:#FF6B6B;
+  --accent2:#FFD166;
+  --muted:#e0e0e0;
+  --glass: rgba(255,255,255,0.15);
+  --radius:18px;
+  --shadow:0 15px 35px rgba(0,0,0,0.5);
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+body{
+  color:#fff;
+  min-height:100vh;
+  background: url('images/image12.jpeg') center/cover no-repeat fixed;
+  display:flex;
+  flex-direction:column;
+}
+body::before{
+  content:''; position:absolute; top:0; left:0; width:100%; height:100%;
+  background:rgba(0,0,0,0.55);
+  z-index:-1;
+}
+/* NAVBAR */
+.nav{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:20px 40px; backdrop-filter:blur(8px);
+  background:linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  position:relative; z-index:1;
+}
+.brand{display:flex; align-items:center; gap:12px;}
+.logo{
+  width:50px; height:50px; border-radius:12px;
+  background:linear-gradient(135deg,#FF6B6B,#FFD166);
+  display:flex; align-items:center; justify-content:center;
+  color:#1b1b1b; font-weight:700; font-family:'Playfair Display', serif; font-size:24px;
+}
+.brand h1{margin:0; font-size:20px; letter-spacing:1px;}
+.nav-links{display:flex; gap:20px; align-items:center;}
+.nav-links a{
+  color:rgba(255,255,255,0.95); text-decoration:none; font-weight:600; position:relative;
+  transition:0.3s;
+}
+.nav-links a::after{
+  content:''; position:absolute; bottom:-4px; left:0; width:0%; height:2px; background:var(--accent); transition:0.3s;
+}
+.nav-links a:hover::after{width:100%;}
+/* HERO */
+.hero{
+  text-align:center;
+  padding:60px 20px 20px;
+}
+.hero h2{
+  font-family:'Playfair Display', serif; font-size:42px; line-height:1.1;
+}
+.hero h2 span{color:var(--accent);}
+.hero p.lead{
+  color:var(--muted); font-size:18px; max-width:700px; margin:10px auto;
+}
+/* CHECKOUT FORM */
+.checkout-container{
+  width:90%;
+  max-width:900px;
+  margin:40px auto;
+  background:var(--glass);
+  backdrop-filter:blur(12px);
+  border-radius:var(--radius);
+  padding:25px;
+  box-shadow:var(--shadow);
+  position:relative; z-index:1;
+}
+.checkout-container h3{
+  color:var(--accent2);
+  margin-bottom:20px;
+}
+.checkout-container label{
+  display:block;
+  margin:10px 0 5px;
+  font-weight:600;
+}
+.checkout-container input, .checkout-container select{
+  width:100%;
+  padding:10px 12px;
+  border-radius:12px;
+  border:none;
+  margin-bottom:15px;
+  background:rgba(255,255,255,0.15);
+  color:#fff;
+}
+.checkout-container input::placeholder{
+  color:rgba(255,255,255,0.7);
+}
+/* SELECT OPTION COLORS */
+.checkout-container select option{
+  color:#000;
+  background:#fff;
+}
+.checkout-container button{
+  padding:12px 25px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:white;
+  font-weight:700;
+  cursor:pointer;
+  transition:0.3s;
+}
+.checkout-container button:hover{
+  transform:scale(1.05);
+  box-shadow:0 8px 25px rgba(255,107,107,0.5);
+}
+/* CART SUMMARY */
+.cart-summary{
+  margin-top:30px;
+}
+.cart-summary table{
+  width:100%;
+  border-collapse:collapse;
+  margin-bottom:20px;
+}
+.cart-summary th, .cart-summary td{
+  padding:10px;
+  text-align:left;
+}
+.cart-summary th{
+  color:var(--accent2);
+  font-size:16px;
+}
+.cart-summary td{
+  color:#fff;
+  font-size:16px;
+}
+footer{
+  margin-top:auto;
+  text-align:center;
+  padding:20px;
+  color:rgba(255,255,255,0.75);
+}
+/* Back */
+.back{
+  text-align:center;
+  margin-top:20px;
+}
+.back a{
+  padding:12px 22px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:white;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:bold;
+  transition:0.3s;
+}
+.back a:hover{
+  transform:scale(1.05);
+}
+</style>
+</head>
+<body>
+<!-- NAVBAR -->
+<nav class="nav">
+  <div class="brand">
+    <div class="logo">B</div>
+    <div>
+      <h1>BookShelf</h1>
+      <div style="font-size:12px;color:rgba(255,255,255,0.75)">Read • Collect • Discover</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="home.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="books_category.html">Books</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html">Login</a>
+    <a href="signup.html">Sign Up</a>
+  </div>
+</nav>
+<!-- HERO -->
+<header class="hero">
+  <h2>Checkout <span>Page</span></h2>
+  <p class="lead">Fill your details and confirm your order.</p>
+</header>
+<!-- CHECKOUT FORM -->
+<div class="checkout-container">
+  <h3>Billing & Payment Details</h3>
+  <form id="checkoutForm">
+    <label for="name">Full Name</label>
+    <input type="text" id="name" placeholder="John Doe" required>
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="example@email.com" required>
+    <label for="address">Address</label>
+    <input type="text" id="address" placeholder="123 Street, City, Country" required>
+    <label for="payment">Payment Method</label>
+    <select id="payment" required>
+      <option value="">Select Payment Method</option>
+      <option value="Credit Card">Credit Card</option>
+      <option value="Debit Card">Debit Card</option>
+      <option value="PayPal">PayPal</option>
+    </select>
+    <div class="cart-summary" id="cartSummary">
+      <h3>Order Summary</h3>
+      <p>Loading cart...</p>
+    </div>
+    <button type="submit">Confirm & Pay</button>
+  </form>
+</div>
+<!-- Back -->
+<div class="back">
+  <a href="cart.html">⬅ Back to Cart</a>
+</div>
+<footer>
+  © BookShelf — Made with ♥ by BookShelf Team
+</footer>
+<script>
+// Load cart from database for summary
+fetch('get_cart.php')
+  .then(response => response.json())
+  .then(cart => {
+    const summary = document.getElementById('cartSummary');
+    summary.innerHTML = '<h3>Order Summary</h3>';
+    if (cart.length === 0) {
+      summary.innerHTML += '<p style="color:var(--muted)">Your cart is empty.</p>';
+      return;
+    }
+    let tableHTML = `<table>
+      <tr>
+        <th>Cover</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Price</th>
+      </tr>`;
+    let total = 0;
+    cart.forEach(b => {
+      total += parseFloat(b.price.replace('$', ''));
+      tableHTML += `<tr>
+        <td><img src="${b.cover}" style="width:60px;height:80px;object-fit:cover;border-radius:8px;"></td>
+        <td>${b.title}</td>
+        <td>${b.author}</td>
+        <td>${b.price}</td>
+      </tr>`;
+    });
+    tableHTML += `<tr>
+      <th colspan="3">Total</th>
+      <th>$${total.toFixed(2)}</th>
+    </tr></table>`;
+    summary.innerHTML += tableHTML;
+  })
+  .catch(err => {
+    document.getElementById('cartSummary').innerHTML += '<p style="color:red">Error loading cart summary</p>';
+  });
+
+// Form submit — send billing details to checkout.php
+document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const address = document.getElementById('address').value.trim();
+  const payment = document.getElementById('payment').value;
+
+  if (!name || !email || !address || !payment) {
+    alert("Please fill all details!");
+    return;
+  }
+
+  // Disable button to prevent double submission
+  const submitBtn = document.querySelector('button[type="submit"]');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Processing...';
+
+  fetch('checkout.php', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({name, email, address, payment})
+  })
+  .then(response => {
+    // Get response as text first
+    return response.text().then(text => {
+      console.log('Raw response:', text);
+      
+      // Check if response is empty
+      if (!text || text.trim() === '') {
+        throw new Error('Empty response from server. Please check if PHP is running correctly.');
+      }
+      
+      // Try to parse as JSON
+      try {
+        const data = JSON.parse(text);
+        return { ok: response.ok, status: response.status, data: data };
+      } catch (e) {
+        console.error('JSON parse error:', e);
+        console.error('Response text:', text);
+        // If it's not JSON, it might be an HTML error page or plain text
+        throw new Error('Server returned invalid response. Response: ' + text.substring(0, 200));
+      }
+    });
+  })
+  .then(result => {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Confirm & Pay';
+    
+    if (result.data.success) {
+      alert(result.data.message + ' Total: ' + result.data.total);
+      window.location.href = "home.html";
+    } else {
+      alert(result.data.message || 'Checkout failed');
+    }
+  })
+  .catch(err => {
+    console.error('Checkout error:', err);
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Confirm & Pay';
+    alert('Error during checkout: ' + err.message);
+  });
+});
+</script>
+</body>
+</html>

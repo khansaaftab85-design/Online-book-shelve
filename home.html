@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BookShelf — Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --accent:#FF6B6B;
+  --accent2:#FFD166;
+  --muted:rgba(224,224,224,0.7);
+  --glass: rgba(255,255,255,0.15);
+  --radius:18px;
+  --shadow:0 15px 35px rgba(0,0,0,0.5);
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+body{
+  color:rgba(255,255,255,0.85);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  overflow-x:hidden;
+}
+/* BACKGROUND */
+body::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: url('images/image12.jpeg') center/cover no-repeat fixed;
+  z-index:-2;
+  filter: brightness(0.7);
+}
+body::after{
+  content:''; position:absolute; top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.35);
+  z-index:-1;
+}
+/* NAVBAR */
+.nav{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:20px 40px; backdrop-filter:blur(8px);
+  background:linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  position:relative; z-index:1;
+  animation: navFade 1.4s ease forwards 0.3s;
+}
+.brand{display:flex; align-items:center; gap:12px;}
+.logo{
+  width:50px; height:50px; border-radius:12px;
+  background:linear-gradient(135deg,#FF6B6B,#FFD166);
+  display:flex; align-items:center; justify-content:center;
+  color:#1b1b1b; font-weight:700; font-family:'Playfair Display', serif; font-size:24px;
+}
+.brand h1{margin:0; font-size:20px; letter-spacing:1px;}
+.nav-links{display:flex; gap:20px; align-items:center;}
+.nav-links a{
+  color:rgba(255,255,255,0.85);
+  text-decoration:none; font-weight:600; position:relative;
+  transition:0.3s;
+  opacity:0;
+  animation: linkPop 0.6s ease forwards;
+}
+.nav-links a:nth-child(1){animation-delay:0.6s;}
+.nav-links a:nth-child(2){animation-delay:0.8s;}
+.nav-links a:nth-child(3){animation-delay:1s;}
+.nav-links a:nth-child(4){animation-delay:1.2s;}
+.nav-links a::after{
+  content:''; position:absolute; bottom:-4px; left:0; width:0%; height:2px; background:var(--accent); transition:0.3s;
+}
+.nav-links a:hover::after{width:100%;}
+/* HERO */
+.hero{
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+  padding:100px 8%; gap:20px;
+  animation: heroZoom 1.5s ease forwards 1.5s;
+}
+.hero h1{
+  font-family:'Playfair Display', serif; font-size:48px; line-height:1.1;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+.hero h1 span{color:var(--accent);}
+.hero p.lead{
+  color:var(--muted); font-size:20px; max-width:700px; line-height:1.6;
+}
+/* FEATURED BOOKS */
+.featured-container{
+  width:90%;
+  max-width:1200px;
+  margin:50px auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:25px;
+}
+.book-box{
+  background:var(--glass); backdrop-filter:blur(10px); border-radius:var(--radius);
+  padding:15px; text-align:center; box-shadow:var(--shadow); transition:0.4s; cursor:pointer;
+  opacity:0;
+  transform: translateY(20px);
+  animation: fadeUp 1s forwards;
+}
+.book-box:nth-child(1){animation-delay:0.2s;}
+.book-box:nth-child(2){animation-delay:0.4s;}
+.book-box:nth-child(3){animation-delay:0.6s;}
+.book-box:nth-child(4){animation-delay:0.8s;}
+.book-box:hover{
+  transform:translateY(-10px) scale(1.05);
+  background: rgba(255,255,255,0.25);
+}
+.book-img{
+  width:140px; height:200px; object-fit:cover; border-radius:12px; margin-bottom:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.5); transition:0.3s;
+}
+.book-box:hover .book-img{transform:scale(1.07);}
+.book-title{font-size:16px;font-weight:600;color:var(--accent2);}
+/* SECTIONS */
+.section{
+  width:90%;
+  max-width:1200px;
+  margin:60px auto;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  text-align:center;
+  background: var(--glass); backdrop-filter: blur(10px); border-radius: var(--radius); padding:30px; box-shadow: var(--shadow);
+  opacity:0;
+  transform: translateY(30px);
+  animation: fadeUp 1s forwards;
+}
+.section:nth-of-type(1){animation-delay:1s;}
+.section:nth-of-type(2){animation-delay:1.2s;}
+.section:nth-of-type(3){animation-delay:1.4s;}
+.section h2{
+  font-size:36px; color:var(--accent2);
+}
+.section p{
+  color:var(--muted); font-size:18px; line-height:1.6; max-width:800px; margin:auto;
+}
+.section a{
+  color:var(--accent2); text-decoration:underline;
+}
+/* FOOTER */
+footer{
+  margin-top:auto;
+  text-align:center;
+  padding:20px;
+  color:rgba(255,255,255,0.7);
+}
+/* ANIMATIONS */
+@keyframes fadeInPage{from{opacity:0;} to{opacity:1;}}
+@keyframes navFade{from{opacity:0; transform:translateY(-20px);} to{opacity:1; transform:translateY(0);} }
+@keyframes linkPop{from{opacity:0; transform:scale(0.8);} to{opacity:1; transform:scale(1);} }
+@keyframes heroZoom{0%{opacity:0; transform:scale(0.9);} 100%{opacity:1; transform:scale(1);} }
+@keyframes fadeUp{from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+</style>
+</head>
+<body>
+<!-- NAVBAR -->
+<nav class="nav">
+  <div class="brand">
+    <div class="logo">B</div>
+    <div>
+      <h1>BookShelf</h1>
+      <div style="font-size:12px;color:rgba(255,255,255,0.75)">Read • Collect • Discover</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="books_category.html">Books</a>
+    <a href="cart.html">Cart</a>
+  </div>
+</nav>
+<!-- HERO -->
+<header class="hero">
+  <h1>Welcome to <span>BookShelf</span></h1>
+  <p class="lead">Discover, collect, and enjoy your favorite books. Browse our collection and find your next read!</p>
+</header>
+<!-- FEATURED BOOKS -->
+<div class="section">
+  <h2>Featured Books</h2>
+  <div class="featured-container" id="featuredBooks"></div>
+</div>
+<!-- ABOUT SNIPPET -->
+<div class="section">
+  <h2>About BookShelf</h2>
+  <p>BookShelf is your ultimate online destination for discovering, collecting, and reading books. From timeless classics to modern bestsellers, explore a wide range of genres and authors, all in one place. <a href="about.html">Learn more</a></p>
+</div>
+<!-- CONTACT CTA -->
+<div class="section">
+  <h2>Get in Touch</h2>
+  <p>Have questions or suggestions? We'd love to hear from you. <a href="contact.html">Contact us now</a></p>
+</div>
+<!-- FOOTER -->
+<footer>
+  © BookShelf — Made with ♥ by BookShelf Team
+</footer>
+<script>
+// Featured books with actual database prices (without $ sign)
+const featuredBooks = [
+  {id: 1, title:'Atomic Habits', author:'James Clear', cover:'images/image3.jpg', price:'15.50'},
+  {id: 2, title:'Rich Dad Poor Dad', author:'Robert Kiyosaki', cover:'images/image5.jpg', price:'14.20'},
+  {id: 3, title:'The Power of Now', author:'Eckhart Tolle', cover:'images/image4.jpg', price:'13.50'},
+  {id: 4, title:'7 Habits of Highly Effective People', author:'Stephen Covey', cover:'images/image6.jpg', price:'16.00'}
+];
+const container = document.getElementById('featuredBooks');
+featuredBooks.forEach(b=>{
+  container.innerHTML += `
+    <div class="book-box" onclick="openBook(${b.id}, '${b.title}', '${b.author}', '${b.cover}', '${b.price}')">
+      <img src="${b.cover}" class="book-img">
+      <div class="book-title">${b.title}</div>
+    </div>
+  `;
+});
+function openBook(id, title, author, cover, price){
+  const book = { id, title, author, cover, price };
+  localStorage.setItem('selectedBook', JSON.stringify(book));
+  window.location.href = "books_detail.html";
+}
+</script>
+</body>
+</html>

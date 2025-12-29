@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BookShelf — Sign Up</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#FF6B6B;
+    --accent2:#FFD166;
+    --glass: rgba(255,255,255,0.25);
+    --muted:#555;
+    --shadow:0 15px 35px rgba(0,0,0,0.3);
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    height:100vh;
+    font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    position:relative;
+    background: #fdf6e3;
+  }
+  body::before {
+    content:''; position:absolute; top:0; left:0;
+    width:100%; height:100%;
+    background: url('images/image14.jpeg') center/cover no-repeat;
+    opacity:0.35; z-index:-1; filter: brightness(1);
+  }
+  .signup-card{
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    padding:45px 35px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    max-width:450px;
+    width:90%;
+    text-align:center;
+    animation:fadeInUp 1s ease;
+    position:relative;
+    z-index:1;
+  }
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+  .signup-card h2{
+    font-family:'Playfair Display', serif;
+    font-size:36px;
+    margin-bottom:10px;
+    color:var(--accent);
+  }
+  .signup-card p.lead{
+    font-size:14px;
+    color:var(--muted);
+    margin-bottom:35px;
+  }
+  .input-group{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:22px;
+    text-align:left;
+  }
+  .input-group label{
+    margin-bottom:6px;
+    font-weight:500;
+    color:#333;
+  }
+  .input-group input{
+    padding:14px 16px;
+    border-radius:14px;
+    border:none;
+    outline:none;
+    font-size:15px;
+    background:rgba(255,255,255,0.4);
+    color:#333;
+    transition:0.4s;
+  }
+  .input-group input:focus{
+    background:rgba(255,255,255,0.6);
+    transform: scale(1.02);
+  }
+  .btn{
+    width:100%;
+    padding:14px 0;
+    border:none;
+    border-radius:14px;
+    background: linear-gradient(90deg,var(--accent),var(--accent2));
+    color:white;
+    font-weight:700;
+    font-size:17px;
+    cursor:pointer;
+    transition:0.4s;
+  }
+  .btn:hover{
+    transform:scale(1.08) rotate(-1deg);
+    box-shadow:0 12px 28px rgba(255,107,107,0.6);
+  }
+  .links{
+    margin-top:20px;
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;
+    color:var(--muted);
+  }
+  .links a{
+    color:var(--muted);
+    text-decoration:none;
+    transition:0.3s;
+  }
+  .links a:hover{
+    color:var(--accent2);
+  }
+  @media(max-width:500px){
+    .signup-card{padding:30px 20px;}
+    .signup-card h2{font-size:28px;}
+  }
+</style>
+</head>
+<body>
+<div class="signup-card">
+  <h2>Create Account</h2>
+  <p class="lead">Sign up to start your BookShelf reading journey!</p>
+  <div class="input-group">
+    <label for="name">Full Name</label>
+    <input type="text" id="name" placeholder="Your Name">
+  </div>
+  <div class="input-group">
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="you@example.com">
+  </div>
+  <div class="input-group">
+    <label for="password">Password</label>
+    <input type="password" id="password" placeholder="Create a password">
+  </div>
+  <div class="input-group">
+    <label for="cpassword">Confirm Password</label>
+    <input type="password" id="cpassword" placeholder="Confirm your password">
+  </div>
+  <button class="btn" id="signupBtn">Sign Up</button>
+  <div class="links">
+    <a href="login.html">Already have an account?</a>
+  </div>
+</div>
+
+<script>
+document.getElementById('signupBtn').addEventListener('click', async () => {
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim().toLowerCase();
+  const password = document.getElementById('password').value.trim();
+  const cpassword = document.getElementById('cpassword').value.trim();
+
+  if (!name || !email || !password || !cpassword) {
+    alert('Please fill all fields.');
+    return;
+  }
+  if (password !== cpassword) {
+    alert('Passwords do not match!');
+    return;
+  }
+
+  try {
+    // Port 80 pe hai is liye bina :8080 ke
+    const response = await fetch('signup.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({name, email, password})
+    });
+
+    const text = await response.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch (e) {
+      console.error('Non-JSON response:', text);
+      alert('Server error. Check console.');
+      return;
+    }
+
+    if (response.ok) {
+      alert(data.message);
+      window.location.href = 'login.html';
+    } else {
+      alert(data.message || 'Signup failed');
+    }
+  } catch (err) {
+    console.error(err);
+    alert('Connection failed');
+  }
+});
+</script>
+</body>
+</html>
